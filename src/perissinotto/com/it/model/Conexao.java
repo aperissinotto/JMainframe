@@ -7,14 +7,21 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Conexao {
-	private Socket socketMainframe;
+	private String hostMainframe;			// IP ou DNS do Mainframe
+	private int portMainframe;				// Port do Mainframe
+	private Socket socketMainframe;			
 	private InputStream inputStream;
 	private OutputStream outputStream;
 
 	private final byte[] buffer4k = new byte[4096];
 	private int bytesRecebidos;
+	
+	public Conexao(String hostMainframe, int portMainframe) {
+		this.hostMainframe = hostMainframe;
+		this.portMainframe = portMainframe;
+	}
 
-	public boolean Conecta(String hostMainframe, int portMainframe) {
+	public boolean Conecta() {
 		try {
 			this.socketMainframe = new Socket(hostMainframe, portMainframe);
 		} catch (UnknownHostException e) {
@@ -74,4 +81,5 @@ public class Conexao {
 		
 		return true;
 	}
+
 }
