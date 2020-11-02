@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Connector {
-	private final byte[] buffer4k = new byte[4096];
+	private final byte[] buffer32k = new byte[32768];
 
 	private int realBufferLength;
 
@@ -23,98 +23,58 @@ public class Connector {
 	}
 
 	public boolean Connect() {
-
 		try {
-
 			this.socketMainframe = new Socket(hostMainframe, portMainframe);
-
 		} catch (UnknownHostException e) {
-
 			e.printStackTrace();
 			return false;
-
 		} catch (IOException e) {
-
 			e.printStackTrace();
 			return false;
-
 		}
-
 		return true;
-
 	}
 
 	public boolean Disconnect() {
-
 		try {
-			
 			this.socketMainframe.close();
-			
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 			return false;
-			
 		}
-		
 		return true;
-		
 	}
 
 	public Message Receive() {
-
 		try {
-			
 			this.inputStream = socketMainframe.getInputStream();
-			
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 			return null;
-			
 		}
-
 		try {
-			
-			this.realBufferLength = this.inputStream.read(this.buffer4k);
-			
+			this.realBufferLength = this.inputStream.read(this.buffer32k);
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 			return null;
-			
 		}
-
-		return new Message(this.buffer4k, this.realBufferLength);
-		
+		return new Message(this.buffer32k, this.realBufferLength);
 	}
 
 	public boolean Send(Message msg) {
-
 		try {
-			
 			this.outputStream = socketMainframe.getOutputStream();
-			
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 			return false;
-			
 		}
-
-//		try {
-//		
-//			this.outputStream.write(msg);
-//		
-//		} catch (IOException e) {
-//		
-//			e.printStackTrace();
-//			return false;
-//		
-//		}
-
+		try {
+			this.outputStream.write(buffer32k);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 		return true;
-		
 	}
 
 }
