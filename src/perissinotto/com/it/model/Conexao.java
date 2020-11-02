@@ -14,7 +14,9 @@ public class Conexao {
 	private OutputStream outputStream;
 
 	private final byte[] buffer4k = new byte[4096];
-	private int bytesRecebidos;
+	
+	private int quantidadeBytesRecebidos;
+	private byte[] mensagemRecebida;
 	
 	public Conexao(String hostMainframe, int portMainframe) {
 		this.hostMainframe = hostMainframe;
@@ -44,24 +46,24 @@ public class Conexao {
 		return true;
 	}
 
-	public byte[] Recebe() {
+	public boolean Recebe() {
 		try {
 			this.inputStream = socketMainframe.getInputStream();
 		} catch (IOException e) {
 			e.printStackTrace();
-			return null;
+			return false;
 		}
 		
 		try {
-			this.bytesRecebidos = this.inputStream.read(this.buffer4k);
+			this.quantidadeBytesRecebidos = this.inputStream.read(this.buffer4k);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return null;
+			return false;
 		}
 		
-		byte[] bufferRecebido = new byte[this.bytesRecebidos];
-	    System.arraycopy (this.buffer4k, 0, bufferRecebido, 0, bufferRecebido.length);
-	    return bufferRecebido;
+		this.mensagemRecebida = new byte[this.quantidadeBytesRecebidos];
+	    System.arraycopy (this.buffer4k, 0, this.mensagemRecebida, 0, this.mensagemRecebida.length);
+	    return true;
 	}
 	
 	public boolean Envia(byte[] bufferEnviado) {
@@ -80,6 +82,14 @@ public class Conexao {
 		}
 		
 		return true;
+	}
+
+	public int getQuantidadeBytesRecebidos() {
+		return quantidadeBytesRecebidos;
+	}
+
+	public byte[] getMensagemRecebida() {
+		return mensagemRecebida;
 	}
 
 }
