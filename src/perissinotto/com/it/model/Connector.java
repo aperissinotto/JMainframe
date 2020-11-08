@@ -26,10 +26,10 @@ public class Connector {
 		try {
 			this.socketMainframe = new Socket(hostMainframe, portMainframe);
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -69,7 +69,7 @@ public class Connector {
 			return false;
 		}
 		try {
-			this.outputStream.write(buffer32k);
+			this.outputStream.write(msg.getMessageContent(), 0, msg.getMessageLength());
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
