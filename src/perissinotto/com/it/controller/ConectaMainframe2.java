@@ -13,10 +13,10 @@ public class ConectaMainframe2 {
 		Connector conexaoMainframe = new Connector("159.8.102.103", 23);
 		
 		if (conexaoMainframe.Connect()) {
-			Message msgrec1 = conexaoMainframe.Receive();
+			Message msgrec1 = conexaoMainframe.Receive(30000);
 			if (msgrec1 != null) {
 				System.out.println(conversor.toHexString(msgrec1.getMessageContent(), 0, msgrec1.getMessageLength()));
-				processador.ProcessCommand(msgrec1.getMessageContent());
+				processador.ProcessMessage(msgrec1);
 			}
 			
 			byte[] bufaux = new byte[3];
@@ -26,10 +26,10 @@ public class ConectaMainframe2 {
 			Message msgsnd1 = new Message(bufaux, bufaux.length);
 			conexaoMainframe.Send(msgsnd1);
 			
-			Message msgrec2 = conexaoMainframe.Receive();
+			Message msgrec2 = conexaoMainframe.Receive(30000);
 			if (msgrec2 != null) {
 				System.out.println(conversor.toHexString(msgrec2.getMessageContent(), 0, msgrec2.getMessageLength()));
-				processador.ProcessCommand(msgrec2.getMessageContent());
+				processador.ProcessMessage(msgrec2);
 			}
 						
 			byte[] bufaux3 = new byte[19];
@@ -55,10 +55,10 @@ public class ConectaMainframe2 {
 			Message msgsnd3 = new Message(bufaux3, bufaux3.length);
 			conexaoMainframe.Send(msgsnd3);
 			
-			Message msgrec4 = conexaoMainframe.Receive();
+			Message msgrec4 = conexaoMainframe.Receive(30000);
 			if (msgrec4 != null) {
 				System.out.println(conversor.toHexString(msgrec4.getMessageContent(), 0, msgrec4.getMessageLength()));
-				processador.ProcessCommand(msgrec4.getMessageContent());
+				processador.ProcessMessage(msgrec4);
 			}
 			
 			byte[] bufaux4 = new byte[3];
@@ -68,16 +68,16 @@ public class ConectaMainframe2 {
 			Message msgsnd4 = new Message(bufaux4, bufaux4.length);
 			conexaoMainframe.Send(msgsnd4);
 			
-			Message msgrec5 = conexaoMainframe.Receive();
+			Message msgrec5 = conexaoMainframe.Receive(30000);
 			if (msgrec5 != null) {
 				System.out.println(conversor.toHexString(msgrec5.getMessageContent(), 0, msgrec5.getMessageLength()));
-				processador.ProcessCommand(msgrec5.getMessageContent());
+				processador.ProcessMessage(msgrec5);
 			}
 			
-			Message msgrec6 = conexaoMainframe.Receive();
+			Message msgrec6 = conexaoMainframe.Receive(30000);
 			if (msgrec6 != null) {
 				System.out.println(conversor.toHexString(msgrec6.getMessageContent(), 0, msgrec6.getMessageLength()));
-				processador.ProcessCommand(msgrec6.getMessageContent());
+				processador.ProcessMessage(msgrec6);
 			}
 			
 			byte[] bufaux5 = new byte[3];
@@ -97,10 +97,10 @@ public class ConectaMainframe2 {
 			Message msgsnd6 = new Message(bufaux6, bufaux6.length);
 			conexaoMainframe.Send(msgsnd6);
 
-			Message msgrec7 = conexaoMainframe.Receive();
+			Message msgrec7 = conexaoMainframe.Receive(30000);
 			if (msgrec7 != null) {
 				System.out.println(conversor.toHexString(msgrec7.getMessageContent(), 0, msgrec7.getMessageLength()));
-				processador.ProcessCommand(msgrec7.getMessageContent());
+				processador.ProcessMessage(msgrec7);
 			}
 		}
 	}

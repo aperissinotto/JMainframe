@@ -3,7 +3,6 @@ package perissinotto.com.it.model;
 public class Processor {
 
 	// TN3270E COMMAND PROTOCOL
-	
 	private static final byte TN3270E = (byte) 0x28;
 	private static final byte ASSOCIATE = (byte) 0x00;
 	private static final byte CONNECT = (byte) 0x01;
@@ -16,7 +15,6 @@ public class Processor {
 	private static final byte SEND = (byte) 0x08;
 	
 	// FUNCTIONS NAMES
-	
 	private static final byte BIND_IMAGE = (byte) 0x00;
 	private static final byte DATA_STREAM_CTL = (byte) 0x01;
 	private static final byte RESPONSES = (byte) 0x02;
@@ -24,7 +22,6 @@ public class Processor {
 	private static final byte SYSREQ = (byte) 0x04;
 	
 	// REASON CODE TN3270E ERROR
-	
 	private static final byte CONN_PARTNER = (byte) 0x00;
 	private static final byte DEVICE_IN_USE = (byte) 0x01;
 	private static final byte INV_ASSOCIATE = (byte) 0x02;
@@ -35,7 +32,6 @@ public class Processor {
 	private static final byte UNSUPPORTED_REQ = (byte) 0x07;
 	
 	// TELNET COMMAND PROTOCOL
-	
 	private static final byte IAC = (byte) 0xFF;
 	private static final byte SE = (byte) 0xF0;
 	private static final byte NOP = (byte) 0xF1;
@@ -53,70 +49,40 @@ public class Processor {
 	private static final byte DO = (byte) 0xFD;
 	private static final byte DONT = (byte) 0xFE;
 	private static final byte TERMINAL_TYPE = (byte) 0x18;
+	private static final byte EOR = (byte) 0x19;
+	private static final byte BINARY = (byte) 0x00;
 
-	public void ProcessCommand(byte[] input) {
+	public Message ProcessMessage(Message inputMessage) {
+		byte[] input = inputMessage.getMessageContent();
+		byte[] output = new byte[32768];
+		int outputLength = 0;
 		for (byte cmd : input) {
 			switch (cmd) {
-			case DEVICE_TYPE:
-				System.out.println("Recebi um comando DEVICE_TYPE");
-				break;
-			case SEND:
-				System.out.println("Recebi um comando SEND");
-				break;
-			case TN3270E:
-				System.out.println("Recebi um comando TN3270E");
-				break;
-			case SE:
-				System.out.println("Recebi um comando SE");
-				break;
-			case NOP:
-				System.out.println("Recebi um comando NOP");
-				break;
-			case DATA_MARK:
-				System.out.println("Recebi um comando DATA_MARK");
-				break;
-			case BREAK:
-				System.out.println("Recebi um comando BREAK");
-				break;
-			case IP:
-				System.out.println("Recebi um comando IP");
-				break;
-			case AO:
-				System.out.println("Recebi um comando AO");
-				break;
-			case AYT:
-				System.out.println("Recebi um comando AYT");
-				break;
-			case EC:
-				System.out.println("Recebi um comando EC");
-				break;
-			case EL:
-				System.out.println("Recebi um comando EL");
-				break;
-			case GA:
-				System.out.println("Recebi um comando GA");
-				break;
-			case SB:
-				System.out.println("Recebi um comando SB");
-				break;
-			case WILL:
-				System.out.println("Recebi um comando WILL");
-				break;
-			case WONT:
-				System.out.println("Recebi um comando WONT");
-				break;
 			case DO:
-				System.out.println("Recebi um comando DO");
-				break;
-			case DONT:
-				System.out.println("Recebi um comando DONT");
+				output[outputLength] = WILL;
+				outputLength++;
 				break;
 			case IAC:
-				System.out.println("Recebi um comando IAC");
+				output[outputLength] = IAC;
+				outputLength++;
 				break;
 			default:
-				System.out.println("Recebi um comando desconhecido");
+				return null;
 			}
+		}
+		return new Message(output, outputLength);
+	}
+	
+	public String ReturnStringTelnetComandProtocol(byte command) {
+		switch (command) {
+		case BINARY:
+			return "BINARY";
+		case TERMINAL_TYPE:
+			return "TERMINAL_TYPE";
+		case EOR:
+			return "EOR";
+		default:
+			return null;
 		}
 	}
 }

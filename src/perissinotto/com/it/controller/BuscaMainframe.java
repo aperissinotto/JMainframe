@@ -18,7 +18,7 @@ public class BuscaMainframe {
 						String ipfinal = new String(ip1 + "." + ip2 + "." + ip3 + "." + ip4);
 						Connector conexaoMainframe = new Connector(ipfinal, 23);
 						if (conexaoMainframe.Connect()) {
-							Message msgrec1 = conexaoMainframe.Receive();
+							Message msgrec1 = conexaoMainframe.Receive(30000);
 							System.out.println(ipfinal + " ok");
 						} else {
 							System.out.println(ipfinal + " erro");

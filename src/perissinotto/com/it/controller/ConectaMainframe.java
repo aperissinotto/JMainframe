@@ -15,7 +15,7 @@ public class ConectaMainframe {
 		Log geraLog = new Log();
 		
 		if (conexaoMainframe.Connect()) {
-			Message msgrec1 = conexaoMainframe.Receive();
+			Message msgrec1 = conexaoMainframe.Receive(30000);
 			if (msgrec1 != null) {
 				System.out.println("RECEIVE: " + conversor.toHexString(msgrec1.getMessageContent(), 0, msgrec1.getMessageLength()));
 				//processador.ProcessCommand(msgrec1.getMessageContent());
@@ -29,7 +29,7 @@ public class ConectaMainframe {
 			System.out.println("SEND: " + conversor.toHexString(msgsnd1.getMessageContent(), 0, msgsnd1.getMessageLength()));
 			conexaoMainframe.Send(msgsnd1);
 			
-			Message msgrec2 = conexaoMainframe.Receive();
+			Message msgrec2 = conexaoMainframe.Receive(30000);
 			if (msgrec2 != null) {
 				System.out.println("RECEIVE: " + conversor.toHexString(msgrec2.getMessageContent(), 0, msgrec2.getMessageLength()));
 				//processador.ProcessCommand(msgrec2.getMessageContent());
@@ -43,7 +43,7 @@ public class ConectaMainframe {
 			System.out.println("SEND: " + conversor.toHexString(msgsnd2.getMessageContent(), 0, msgsnd2.getMessageLength()));
 			conexaoMainframe.Send(msgsnd2);
 			
-			Message msgrec3 = conexaoMainframe.Receive();
+			Message msgrec3 = conexaoMainframe.Receive(30000);
 			if (msgrec3 != null) {
 				System.out.println("RECEIVE: " + conversor.toHexString(msgrec3.getMessageContent(), 0, msgrec3.getMessageLength()));
 				//processador.ProcessCommand(msgrec3.getMessageContent());
@@ -72,7 +72,7 @@ public class ConectaMainframe {
 			System.out.println("SEND: " + conversor.toHexString(msgsnd3.getMessageContent(), 0, msgsnd3.getMessageLength()));
 			conexaoMainframe.Send(msgsnd3);
 			
-			Message msgrec4 = conexaoMainframe.Receive();
+			Message msgrec4 = conexaoMainframe.Receive(30000);
 			if (msgrec4 != null) {
 				System.out.println("RECEIVE: " + conversor.toHexString(msgrec4.getMessageContent(), 0, msgrec4.getMessageLength()));
 				//processador.ProcessCommand(msgrec4.getMessageContent());
@@ -86,13 +86,13 @@ public class ConectaMainframe {
 			System.out.println("SEND: " + conversor.toHexString(msgsnd4.getMessageContent(), 0, msgsnd4.getMessageLength()));
 			conexaoMainframe.Send(msgsnd4);
 			
-			Message msgrec5 = conexaoMainframe.Receive();
+			Message msgrec5 = conexaoMainframe.Receive(30000);
 			if (msgrec5 != null) {
 				System.out.println("RECEIVE: " + conversor.toHexString(msgrec5.getMessageContent(), 0, msgrec5.getMessageLength()));
 				//processador.ProcessCommand(msgrec5.getMessageContent());
 			}
 			
-			Message msgrec6 = conexaoMainframe.Receive();
+			Message msgrec6 = conexaoMainframe.Receive(30000);
 			if (msgrec6 != null) {
 				System.out.println("RECEIVE: " + conversor.toHexString(msgrec6.getMessageContent(), 0, msgrec6.getMessageLength()));
 				//processador.ProcessCommand(msgrec6.getMessageContent());
@@ -117,7 +117,7 @@ public class ConectaMainframe {
 			System.out.println("SEND: " + conversor.toHexString(msgsnd6.getMessageContent(), 0, msgsnd6.getMessageLength()));
 			conexaoMainframe.Send(msgsnd6);
 
-			Message msgrec7 = conexaoMainframe.Receive();
+			Message msgrec7 = conexaoMainframe.Receive(30000);
 			if (msgrec7 != null) {
 				System.out.println("RECEIVE: " + conversor.toHexString(msgrec7.getMessageContent(), 0, msgrec7.getMessageLength()));
 				//processador.ProcessCommand(msgrec7.getMessageContent());
