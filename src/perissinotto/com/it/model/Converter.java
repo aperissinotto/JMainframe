@@ -1,6 +1,10 @@
 package perissinotto.com.it.model;
 
 public class Converter {
+	
+	public Converter() {
+		
+	}
 
 	public String toHexString(byte[] input, int offset, int length) {
 		StringBuilder output = new StringBuilder();
@@ -13,6 +17,11 @@ public class Converter {
 		}
 
 		return output.toString();
+	}
+	
+	public byte[] toBytesString(String input, int offset, int length) {
+		input.charAt(0);
+		return null;
 	}
 
 }

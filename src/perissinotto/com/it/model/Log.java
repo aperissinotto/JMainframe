@@ -7,11 +7,15 @@ import java.time.LocalDateTime;
 
 public class Log {
 	
-		private LocalDateTime logDateTime = null;
+		private LocalDateTime logDateTime;
 		
-		public void toFile(String logInfo) {
+		public Log() {
+			
+		}
+
+		public void toFile(String logInfo, String fileName) {
 			try {
-				FileWriter fw = new FileWriter("log.txt", true);
+				FileWriter fw = new FileWriter(fileName, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				this.logDateTime = LocalDateTime.now();
 				bw.write(this.logDateTime.toString() + " - " + logInfo + System.lineSeparator());
